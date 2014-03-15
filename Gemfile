@@ -4,29 +4,33 @@ gem 'rails', '4.1.0.rc1'
 
 gem 'rails-api'
 
-
-
-gem 'spring', :group => :development
-
-
-# To use ActiveModel has_secure_password
-# gem 'bcrypt-ruby', '~> 3.1.2'
+# Use Mongoid for db
+gem 'moped', github: 'mongoid/moped'
+gem 'mongoid', github: 'mongoid/mongoid'
 
 # To use Jbuilder templates for JSON
-# gem 'jbuilder'
+gem 'jbuilder'
 
 # Use unicorn as the app server
-# gem 'unicorn'
+gem 'unicorn'
 
-# Deploy with Capistrano
-# gem 'capistrano', :group => :development
+# Active Model Serializers for our JSON API
+gem "active_model_serializers"
 
-# To use debugger
-# gem 'ruby-debug19', :require => 'ruby-debug'
-
-gem "jbuilder"
+# Slim is the besttt
 gem "slim"
+
+gem 'spring', :group => :development
 group :development, :test do
   gem "rspec-rails"
   gem "jazz_hands"
 end
+
+group :development do
+	gem "better_errors"
+	gem "binding_of_caller"
+	gem 'meta_request'
+end
+
+# Heroku wants this
+gem 'rails_12factor', group: :production
