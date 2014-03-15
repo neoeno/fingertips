@@ -86,7 +86,6 @@ module.exports = function (grunt) {
             '<%= yeoman.app %>'
           ],
           middleware: function (connect) {
-            grunt.log.write("sdfsdsdfsfdsdfsdf");
             return [proxySnippet,
                     mountFolder(connect, '.tmp'),
                     mountFolder(connect, 'app')];
