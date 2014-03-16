@@ -17,8 +17,13 @@ gem 'unicorn'
 # Active Model Serializers for our JSON API
 gem "active_model_serializers"
 
+# Omniauth for users
+gem "omniauth"
+gem "omniauth-facebook"
+
 # Slim is the besttt
 gem "slim"
+gem "redcarpet" # For embedded markdown
 
 gem 'spring', :group => :development
 group :development, :test do
