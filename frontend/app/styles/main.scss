@@ -1,8 +1,15 @@
 $icon-font-path: "/bower_components/sass-bootstrap/fonts/";
 
 @import 'sass-bootstrap/lib/bootstrap';
+@import 'config/constants';
+@import 'config/scaffold';
 
 body{
 }
 
-@import 'controllers/promo/main.scss';
+@import 'controllers/promo/main';
+@import 'controllers/texts/shared';
+@import 'controllers/texts/index';
+@import 'elements/text';
+@import 'elements/comment';
+@import 'elements/feedback';

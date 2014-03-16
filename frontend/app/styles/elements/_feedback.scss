@@ -1,0 +1,29 @@
+.feedback{
+    .glyphicon-heart{
+        font-size: 36px;
+    }
+
+    .hearts-given{
+        img{
+            margin-right: 3px;
+        }
+    }
+
+    .like-button{
+        cursor: pointer;
+        margin-bottom: 6px;
+
+        .glyphicon,.title{
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        .title{
+            margin-left: 6px;
+        }
+
+        &:hover,&.active{
+            color: $c-heart-red;
+        }
+    }
+}

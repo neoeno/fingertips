@@ -3,7 +3,8 @@ angular.module('fingertips', [
     'ngResource',
     'ngSanitize',
     'ngRoute',
-    'facebook'
+    'facebook',
+    'ui.bootstrap'
 ])
     .config(function($routeProvider){
         'use strict';
@@ -11,6 +12,9 @@ angular.module('fingertips', [
             .when('/', {
                 templateUrl: 'views/main.html',
                 controller: 'MainCtrl'
+            }).when('/texts', {
+                templateUrl: 'views/texts/index.html',
+                controller: 'TextsIndexCtrl'
             }).otherwise({
                 redirectTo: '/'
             })

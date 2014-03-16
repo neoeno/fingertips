@@ -6,11 +6,12 @@
     width: 100%;
     background: url('/images/fingers-background.jpg');
 
-    h1{
-        font-size: 60px;
-    }
-
     .white-bar{
         background: white;
+    }
+
+    .center-button{
+        text-align: center;
+        padding: $r;
     }
 }
