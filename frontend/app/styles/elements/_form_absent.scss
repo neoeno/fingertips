@@ -1,0 +1,27 @@
+.form-absent{
+    .form-control{
+        height: auto;
+        padding: 0;
+        border: 0px;
+        @include box-shadow(none);
+
+        &.form-control-huge{
+            font-size: 32px;
+            margin-bottom: 6px;
+        }
+
+        &.form-control-large{
+            font-size: 24px;
+        }
+    }
+
+    textarea{
+        resize: none;
+    }
+}
+
+.btn-absent{
+    border-radius: 0px;
+    font-size: 24px;
+    font-weight: 300;
+}

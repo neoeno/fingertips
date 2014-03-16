@@ -5,11 +5,16 @@ $icon-font-path: "/bower_components/sass-bootstrap/fonts/";
 @import 'config/scaffold';
 
 body{
+    *,input,textarea{
+        -webkit-font-smoothing: antialiased;
+    }
 }
 
 @import 'controllers/promo/main';
-@import 'controllers/texts/shared';
 @import 'controllers/texts/index';
+@import 'controllers/texts/text_form';
+
 @import 'elements/text';
 @import 'elements/comment';
 @import 'elements/feedback';
+@import 'elements/form_absent';

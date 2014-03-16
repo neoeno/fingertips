@@ -9,6 +9,8 @@ class User
     field :first_name, type: String
     field :email, type: String
 
+	has_many :texts
+
     ## OAUTH
 	def self.find_or_create_from_auth_hash(auth)
 		where(auth.slice(:provider, :uid)).first_or_create do |user|
@@ -18,6 +20,10 @@ class User
 			user.name = auth.info.name
             user.first_name = auth.info.first_name
 		end
+	end
+
+	def categories
+		texts.pluck(:category).uniq
 	end
 
 end

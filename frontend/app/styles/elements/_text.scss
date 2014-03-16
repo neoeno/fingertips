@@ -5,19 +5,6 @@
         margin-top: 0;
     }
 
-    .info-side{
-        text-align: right;
-        .profile-photo{
-            margin-top: 6px;
-        }
-
-        .first-name{
-            line-height: 24px;
-            color: $c-grey-pale;
-            font-weight: 300;
-        }
-    }
-
     .text-body p{
         font-size: 18px;
         font-weight: 300;
@@ -30,5 +17,18 @@
 
     .comments{
         margin-top: $r*2;
+    }
+}
+
+.info-side{
+    text-align: right;
+    .profile-photo{
+        margin-top: 6px;
+    }
+
+    .first-name{
+        line-height: 24px;
+        color: $c-grey-pale;
+        font-weight: 300;
     }
 }

@@ -1,0 +1,12 @@
+.text-form{
+    margin-bottom: $r*2;
+
+    &.active{
+        border-bottom: 1px solid $c-grey-pale;
+    }
+
+    .btn-absent{
+        margin-top: $r;
+        width: 60%;
+    }
+}

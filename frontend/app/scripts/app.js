@@ -1,10 +1,12 @@
 angular.module('fingertips', [
     'ngCookies',
-    'ngResource',
+    'rails',
     'ngSanitize',
     'ngRoute',
     'facebook',
-    'ui.bootstrap'
+    'ui.bootstrap',
+    'monospaced.elastic',
+    'btford.markdown'
 ])
     .config(function($routeProvider){
         'use strict';
