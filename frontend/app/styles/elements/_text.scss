@@ -3,6 +3,10 @@
 
     h3{
         margin-top: 0;
+
+        .category{
+            color: $c-grey-pale;
+        }
     }
 
     .text-body p{
@@ -16,7 +20,12 @@
     }
 
     .comments{
-        margin-top: $r*2;
+        border-left: 1px solid black;
+        margin-top: $r;
+    }
+
+    .comments-hidden-notice{
+        margin-bottom: $r;
     }
 }
 

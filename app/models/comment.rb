@@ -1,15 +1,15 @@
-class Text
+class Comment
     include Mongoid::Document
     include Mongoid::Timestamps
 
     belongs_to :user
-    has_many :comments
+    belongs_to :text
 
-    field :title, type: String
     field :body, type: String
-    field :category, type: String
-
     field :likes, type: Array, default: []
+
+    validates_presence_of :user
+    validates_presence_of :text
 
     def liked?(test_user)
         return likes.include?(test_user.id.to_s)

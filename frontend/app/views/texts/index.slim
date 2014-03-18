@@ -9,17 +9,19 @@
         .row
             .col-xs-4.col-xs-offset-1
                 h3
-                    | {{text.title}}
+                    ' {{text.title}}
+                    span.category
+                        | {{text.category}}
         .row
             .col-xs-1.info-side
                 img.profile-photo ng-src="{{text.user.avatar(60)}}" height="60" width="60"
                 .first-name
                     | {{text.user.firstName}}
-            .col-xs-5.text-body ng-if="text.showPreview"
+            .col-xs-5.text-body ng-if="text.preview"
                 div btf-markdown="text.preview"
                 .read-more
-                    a ng-click="text.showPreview = false" read {{text.previewWordDifference}} more words
-            .col-xs-5.text-body ng-if="!text.showPreview"
+                    a ng-click="text.preview = false" read {{text.previewDifference}} more words
+            .col-xs-5.text-body ng-if="!text.preview"
                 div btf-markdown="text.body"
 
             .col-xs-4.col-xs-offset-1
@@ -34,13 +36,4 @@
                     .hearts-given
                         img.user-icon[ ng-src="{{liker.avatar(36)}}" tooltip="{{liker.name}}"
                                        ng-repeat="liker in text.likers" height="36" width="36" tooltip-placement="bottom" ]
-        .row
-            .col-xs-5.col-xs-offset-1.comments
-                .comment
-                    .row
-                        .col-xs-1
-                            img.profile-photo src="http://theoldreader.com/kittens/24/24" height="24" width="24"
-                        .col-xs-10.comment-body
-                            p
-                                span.first-name= 'caden: '
-                                | By an amazing coincidence, I have just made the same argument. (In my case, it's not comparative, though - in other words, I'm not arguing that syophancy is going up or down - I'm just saying that new music criticism remains very uncritical.)
+        == Slim::Template.new('app/views/texts/_comments.slim').render

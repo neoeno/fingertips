@@ -1,8 +1,8 @@
 .text-form{
     margin-bottom: $r*2;
 
-    &.active{
-        border-bottom: 1px solid $c-grey-pale;
+    &.active .main-edit-col{
+        border-bottom: 1px solid black;
     }
 
     .btn-absent{

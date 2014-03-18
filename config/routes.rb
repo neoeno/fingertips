@@ -4,6 +4,13 @@ Rails.application.routes.draw do
         resources :texts do
             member do
                 post 'like' => 'texts#like'
+                delete 'like' => 'texts#unlike'
+            end
+        end
+        resources :comments do
+            member do
+                post 'like' => 'texts#like'
+                delete 'like' => 'texts#unlike'
             end
         end
         get '/oauth/:provider/callback' => 'sessions#create'

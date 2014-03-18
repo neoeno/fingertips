@@ -1,0 +1,25 @@
+.row
+    .col-xs-5.col-xs-offset-1.comments ng-controller="CommentsListCtrl"
+        .comments-hidden-notice ng-if="commentsFrom"
+            a ng-click="showComments()" see {{commentsFrom}} more comments
+        .comment ng-repeat="comment in comments.slice(commentsFrom)"
+            .row
+                .col-xs-1
+                    img.profile-photo ng-src="{{comment.user.avatar(24)}}" height="24" width="24"
+                .col-xs-10.comment-body
+                    p ng-if="comment.preview"
+                        span.first-name
+                            ' {{comment.user.firstName}}
+                        ' {{comment.preview}}
+                        a ng-click="comment.preview = false" read more
+                    p ng-if="!comment.preview"
+                        span.first-name
+                            ' {{comment.user.firstName}}
+                        | {{comment.body}}
+        .comment-form ng-controller="CommentsFormCtrl"
+            .row
+                .col-xs-1
+                    img.profile-photo ng-src="{{text.user.avatar(24)}}" height="24" width="24"
+                .col-xs-10
+                    form.form-absent
+                        textarea.form-control placeholder="comment on this text…" msd-elastic="\n" ng-model="comment.body" ng-keypress="checkForEnter($event)"

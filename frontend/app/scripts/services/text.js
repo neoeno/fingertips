@@ -1,35 +1,10 @@
 angular.module('fingertips')
-    .factory('Text', function(railsResourceFactory, User, $http){
+    .factory('Text', function(railsResourceFactory, railsSerializer, Comment){
         'use strict';
-
         var maxPreviewLength = 250
 
         function wordCount(text){
             return text.split(/\W+/).length
-        }
-
-        function processResponse(text){
-            text.user = new User(text.user)
-            text.likers = processLikers(text.likers)
-
-            if( text.body.length > maxPreviewLength) {
-                text.showPreview = true
-                text.preview = text.body.split('\n\n').slice(0,2).join('\n\n')
-
-                if( text.preview.length > maxPreviewLength ){
-                    text.preview = text.body.substring(0, maxPreviewLength-1)+'…'
-                }
-
-                text.previewWordDifference = wordCount(text.body) - wordCount(text.preview)
-            }
-        }
-
-        function processLikers(likersData){
-            var likers = []
-            angular.forEach(likersData, function(user){
-                likers.push(new User(user))
-            })
-            return likers
         }
 
         var Text = railsResourceFactory({
@@ -37,26 +12,74 @@ angular.module('fingertips')
             name: 'text',
             interceptors: [{
                 afterResponse: function(result){
-                    angular.forEach(result, processResponse)
+                    if( angular.isArray(result) ){
+                        angular.forEach(result, function(text){ text.init() })
+                    }else{
+                        result.init()
+                    }
+
+                    return result
+                },
+                response: function(result){
+                    // accept either wrapped or unwrapped
+                    if( result.data.text )
+                        result.data = result.data.text
                     return result
                 }
-            }]
+            }],
+            serializer: railsSerializer(function(){
+                this.resource('likers', 'User')
+                this.resource('user', 'User')
+                this.resource('comments', 'Comment')
+            })
         })
+
+        Text.prototype.makePreview = function(){
+            if( this.body.length > maxPreviewLength) {
+                this.preview = this.body.split('\n\n').slice(0,2).join('\n\n')
+
+                if( this.preview.length > maxPreviewLength ){
+                    this.preview = this.body.substring(0, maxPreviewLength-1)+'…'
+                }
+
+                this.previewDifference = wordCount(this.body) - wordCount(this.preview)
+            }
+        }
+
+        Text.prototype.init = function(){
+            this.makePreview()
+
+            angular.forEach(this.comments, function(comment){
+                comment.init()
+            })
+        }
 
         Text.prototype.isPreviewable = function(){
             return typeof this.previewWordDifference == 'undefined'
         }
 
         Text.prototype.like = function(opts){
-            var context = this
-            return $http.post('/api/v1/texts/'+this.id+'/like', opts).then(function(response){
-                context.likes = response.data.text.likes
-                context.likers = processLikers(response.data.text.likers)
-            })
+            opts = opts || {}
+            if( opts.destroy ){
+                return this.$delete(this.$url('like'))
+            }else{
+                return this.$post(this.$url('like'))
+            }
         }
 
         Text.prototype.hasLiked = function(userId){
             return this.likes.indexOf(userId) !== -1
+        }
+
+        Text.prototype.comment = function(commentData){
+            var comment = new Comment(commentData)
+            comment.textId = this.id
+            this.comments.push(comment)
+            return comment.create()
+        }
+
+        Text.prototype.lastComments = function(){
+            return this.comments.slice(this.comments.length-2)
         }
 
         return Text

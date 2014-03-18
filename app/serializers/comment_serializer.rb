@@ -1,7 +1,6 @@
-class TextSerializer < ActiveModel::Serializer
-    attributes :id, :title, :body, :category, :likes, :likers
+class CommentSerializer < ActiveModel::Serializer
+    attributes :id, :body, :likes, :likers
     has_one :user
-    has_many :comments
 
     def likers
         return [] if likes.blank?

@@ -10,6 +10,7 @@ class User
     field :email, type: String
 
 	has_many :texts
+	has_many :comments
 
     ## OAUTH
 	def self.find_or_create_from_auth_hash(auth)
